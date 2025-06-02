@@ -1,6 +1,7 @@
-const fetch = require("node-fetch");
-
+// getPlayerUrl.js
 exports.handler = async function (event) {
+  const fetch = (await import("node-fetch")).default;
+
   const {
     video_id,
     tmdb = 0,
