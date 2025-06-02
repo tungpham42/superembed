@@ -1,7 +1,7 @@
 {
   "functions": {
     "api/*.go": {
-      "runtime": "vercel/go@3.2.1"
+      "runtime": "go@3.0.1"
     }
   }
 }
