@@ -4,7 +4,7 @@ exports.handler = async function (event) {
 
   const params = event.queryStringParameters || {};
   const video_id = params.video_id;
-  const tmdb = params.tmdb || 0;
+  const tmdb = params.tmdb || 1;
   const s = params.s || 0;
   const e = params.e || 0;
 
