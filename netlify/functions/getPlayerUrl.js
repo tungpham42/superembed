@@ -2,12 +2,11 @@
 exports.handler = async function (event) {
   const fetch = (await import("node-fetch")).default;
 
-  const {
-    video_id,
-    tmdb = 0,
-    season = 0,
-    episode = 0,
-  } = event.queryStringParameters;
+  const params = event.queryStringParameters || {};
+  const video_id = params.video_id;
+  const tmdb = params.tmdb || 0;
+  const season = params.season || 0;
+  const episode = params.episode || 0;
 
   if (!video_id) {
     return {
@@ -16,8 +15,8 @@ exports.handler = async function (event) {
     };
   }
 
-  const playerSettings = {
-    player_font: "Verdana",
+  const defaultSettings = {
+    player_font: "Arial",
     player_bg_color: "000000",
     player_font_color: "ffffff",
     player_primary_color: "00edc3",
@@ -32,24 +31,28 @@ exports.handler = async function (event) {
     tmdb,
     season,
     episode,
-    ...playerSettings,
+    s: season,
+    e: episode,
+    ...defaultSettings,
   });
 
-  const requestUrl = `https://getsuperembed.link/?${query.toString()}`;
+  const remoteUrl = `https://getsuperembed.link/?${query.toString()}`;
 
   try {
-    const response = await fetch(requestUrl);
-    const player_url = await response.text();
+    const response = await fetch(remoteUrl);
+    const content = await response.text();
 
-    if (player_url.startsWith("https://")) {
+    if (content.startsWith("https://")) {
       return {
-        statusCode: 200,
-        body: JSON.stringify({ redirect: player_url }),
+        statusCode: 302,
+        headers: {
+          Location: content,
+        },
       };
     } else {
       return {
         statusCode: 400,
-        body: JSON.stringify({ error: player_url }),
+        body: JSON.stringify({ error: content }),
       };
     }
   } catch (err) {
