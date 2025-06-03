@@ -16,14 +16,14 @@ exports.handler = async function (event) {
   }
 
   const defaultSettings = {
-    player_font: "Verdana",
+    player_font: "Arial",
     player_bg_color: "000000",
     player_font_color: "ffffff",
-    player_primary_color: "00edc3",
-    player_secondary_color: "10fdd3",
+    player_primary_color: "dd202c",
+    player_secondary_color: "555555",
     player_loader: 1,
     preferred_server: 0,
-    player_sources_toggle_type: 1,
+    player_sources_toggle_type: 2,
   };
 
   const query = new URLSearchParams({
