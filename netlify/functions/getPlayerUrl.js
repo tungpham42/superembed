@@ -5,8 +5,8 @@ exports.handler = async function (event) {
   const params = event.queryStringParameters || {};
   const video_id = params.video_id;
   const tmdb = params.tmdb || 0;
-  const season = params.season || 0;
-  const episode = params.episode || 0;
+  const s = params.s || 0;
+  const e = params.e || 0;
 
   if (!video_id) {
     return {
@@ -29,10 +29,8 @@ exports.handler = async function (event) {
   const query = new URLSearchParams({
     video_id,
     tmdb,
-    season,
-    episode,
-    s: season,
-    e: episode,
+    s,
+    e,
     ...defaultSettings,
   });
 
