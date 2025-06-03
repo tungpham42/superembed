@@ -11,7 +11,8 @@ exports.handler = async function (event) {
   if (!video_id) {
     return {
       statusCode: 400,
-      body: JSON.stringify({ error: "Missing video_id" }),
+      headers: { "Content-Type": "text/html" },
+      body: "Missing video_id",
     };
   }
 
@@ -49,14 +50,16 @@ exports.handler = async function (event) {
       };
     } else {
       return {
-        statusCode: 400,
-        body: JSON.stringify({ error: content }),
+        statusCode: 200,
+        headers: { "Content-Type": "text/html" },
+        body: content,
       };
     }
-  } catch (err) {
+  } catch {
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: "Request server didn't respond" }),
+      headers: { "Content-Type": "text/html" },
+      body: "Error contacting remote server",
     };
   }
 };
