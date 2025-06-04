@@ -23,7 +23,7 @@ exports.handler = async function (event) {
     player_secondary_color: "555555",
     player_loader: 1,
     preferred_server: 0,
-    player_sources_toggle_type: 2,
+    player_sources_toggle_type: 1,
   };
 
   const query = new URLSearchParams({
